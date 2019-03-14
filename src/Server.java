@@ -10,34 +10,25 @@ public class Server {
         private static BufferedWriter out;
 
         public static void main(String[] args) {
-            try {
-                try  {
-                    server = new ServerSocket(4004);
-                    System.out.println("Сервер запущен!");
-                    clientSocket = server.accept();
-                    try {
-                        in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-                        out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
+                try {
+                server = new ServerSocket(4004);
+                System.out.println("Сервер запущен!");
+                clientSocket = server.accept();
+                in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+                out = new BufferedWriter(new OutputStreamWriter(clientSocket.getOutputStream()));
 
-                        String word = in.readLine();
-                        System.out.println(word);
+                String word = in.readLine();
+                System.out.println(word);
 
-                        out.write("Привет, это Сервер! Подтверждаю, вы написали : " + word + "\n");
+                out.write("Привет, это Сервер! Подтверждаю, вы написали : " + word + "\n");
 
-                        out.flush();
-
-                    } finally {
-                        System.out.println("dfjkhgkdf");
-                        clientSocket.close();
-                        in.close();
-                        out.close();
-                    }
+                out.flush();
                 } finally {
-                    System.out.println("Сервер закрыт!");
-                    server.close();
+                System.out.println("Сервер закрыт!");
+                server.close();
+                clientSocket.close();
+                in.close();
+                out.close();
                 }
-            } catch (IOException e) {
-                System.err.println(e);
-            }
         }
 }
